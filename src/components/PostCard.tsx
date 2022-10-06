@@ -5,13 +5,13 @@ interface Props {
   post: Post;
 }
 
-const PostCard = (post: Props) => {
+const PostCard = ({ post }: Props) => {
   return (
     <div className="PostCard">
-      Post Card Works
-      {post.post.title}
-      <br />
-      {post.post.thought}
+      <p>
+        <strong>{post.title}</strong>
+      </p>
+      <p>{post.thought}</p>
     </div>
   );
 };
