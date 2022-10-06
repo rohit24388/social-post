@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Post from "../models/Post";
 import "./Home.css";
+import PostForm from "./PostForm";
 import PostList from "./PostList";
 
 const Home = () => {
@@ -19,9 +20,22 @@ const Home = () => {
     },
   ]);
 
+  const deletePost = (index: number): void => {
+    setPosts((prev) => [...prev.slice(0, index), ...prev.slice(index + 1)]);
+  };
+
+  const addPost = (post: Post): void => {
+    setPosts((prev) => [post, ...prev]);
+    setShowForm(false);
+  };
+
+  const [showForm, setShowForm] = useState(false);
+
   return (
     <div className="Home">
-      <PostList posts={posts}></PostList>
+      <button onClick={() => setShowForm(true)}>New Thought</button>
+      {showForm && <PostForm onSubmitForm={addPost} />}
+      <PostList posts={posts} onDelete={deletePost}></PostList>
     </div>
   );
 };

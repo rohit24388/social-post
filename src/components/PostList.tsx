@@ -4,13 +4,18 @@ import "./PostList.css";
 
 interface Props {
   posts: Post[];
+  onDelete: (index: number) => void;
 }
 
-const PostList = ({ posts }: Props) => {
+const PostList = ({ posts, onDelete }: Props) => {
   return (
     <div className="PostList">
-      {posts.map((post) => (
-        <PostCard key={post.title} post={post} />
+      {posts.map((post, index) => (
+        <PostCard
+          key={post.title}
+          post={post}
+          onDelete={() => onDelete(index)}
+        />
       ))}
     </div>
   );
